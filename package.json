@@ -1,0 +1,21 @@
+{
+  "name": "arabic-english-translator",
+  "version": "1.0.0",
+  "description": "مترجم شامل من العربية إلى الإنجليزية",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "translator",
+    "arabic",
+    "english",
+    "dictionary"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مترجم شامل - عربي ⇄ إنجليزي</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-language"></i>
+                    <h1>مترجم شامل</h1>
+                    <div class="premium-badge">
+                        <i class="fas fa-crown"></i>
+                        <span>Premium</span>
+                    </div>
+                </div>
+                <p class="subtitle">ترجمة احترافية ثنائية الاتجاه - عربي ⇄ إنجليزي</p>
+                <div class="subscription-status" id="subscriptionStatus">
+                    <span class="free-user">مستخدم مجاني - ترقية للحصول على المميزات الكاملة</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="translator-section">
+                <div class="input-section">
+                    <div class="input-header">
+                        <i class="fas fa-edit"></i>
+                        <h3>أدخل الكلمة (عربي أو إنجليزي)</h3>
+                        <div class="language-detector" id="languageDetector">
+                            <span class="detected-lang">تم اكتشاف: <span id="detectedLanguage">-</span></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="wordInput" 
+                            class="word-input" 
+                            placeholder="اكتب الكلمة هنا... (عربي أو English)"
+                            autocomplete="off"
+                        >
+                        <button id="translateBtn" class="translate-btn">
+                            <div class="fan-container">
+                                <i class="fas fa-fan fan-icon" id="fanIcon"></i>
+                            </div>
+                            <span class="btn-text">ترجم</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="loading-section" id="loadingSection">
+                    <div class="loading-content">
+                        <div class="spinning-fan">
+                            <i class="fas fa-fan"></i>
+                        </div>
+                        <p>جاري البحث والترجمة...</p>
+                    </div>
+                </div>
+
+                <div class="results-section" id="resultsSection">
+                    <div class="translation-card">
+                        <div class="card-header">
+                            <i class="fas fa-language"></i>
+                            <h3>الترجمة الأساسية</h3>
+                        </div>
+                        <div class="translation-content">
+                            <div class="translation-item">
+                                <span class="label">الكلمة الأصلية:</span>
+                                <span class="original-word" id="originalWord">-</span>
+                                <span class="language-flag" id="originalLanguage">-</span>
+                            </div>
+                            <div class="translation-item">
+                                <span class="label">الترجمة:</span>
+                                <span class="translated-word" id="translatedWord">-</span>
+                                <button class="pronunciation-btn" id="pronunciationBtn">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="translation-item">
+                                <span class="label">النطق:</span>
+                                <span class="pronunciation" id="pronunciation">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="details-grid">
+                        <!-- Basic Info (Free) -->
+                        <div class="detail-card free-feature">
+                            <div class="card-header">
+                                <i class="fas fa-book"></i>
+                                <h4>التعريف الأساسي</h4>
+                                <span class="feature-badge free">مجاني</span>
+                            </div>
+                            <div class="card-content">
+                                <p id="basicDefinition">-</p>
+                            </div>
+                        </div>
+
+                        <!-- Word Type (Free) -->
+                        <div class="detail-card free-feature">
+                            <div class="card-header">
+                                <i class="fas fa-tags"></i>
+                                <h4>نوع الكلمة</h4>
+                                <span class="feature-badge free">مجاني</span>
+                            </div>
+                            <div class="card-content">
+                                <span class="word-type" id="wordType">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Detailed Definition (Premium) -->
+                        <div class="detail-card premium-feature" id="detailedDefinitionCard">
+                            <div class="card-header">
+                                <i class="fas fa-book-open"></i>
+                                <h4>التعريف المفصل</h4>
+                                <span class="feature-badge premium">
+                                    <i class="fas fa-crown"></i>
+                                    Premium
+                                </span>
+                            </div>
+                            <div class="card-content">
+                                <div class="premium-overlay">
+                                    <i class="fas fa-lock"></i>
+                                    <p>ترقية للحصول على التعريف المفصل</p>
+                                    <button class="upgrade-btn" onclick="showUpgradeModal()">ترقية الآن</button>
+                                </div>
+                                <div class="premium-content" id="detailedDefinition" style="display: none;">-</div>
+                            </div>
+                        </div>
+
+                        <!-- Level (Premium) -->
+                        <div class="detail-card premium-feature" id="levelCard">
+                            <div class="card-header">
+                                <i class="fas fa-layer-group"></i>
+                                <h4>مستوى الصعوبة</h4>
+                                <span class="feature-badge premium">
+                                    <i class="fas fa-crown"></i>
+                                    Premium
+                                </span>
+                            </div>
+                            <div class="card-content">
+                                <div class="premium-overlay">
+                                    <i class="fas fa-lock"></i>
+                                    <p>ترقية لمعرفة مستوى الكلمة</p>
+                                    <button class="upgrade-btn" onclick="showUpgradeModal()">ترقية الآن</button>
+                                </div>
+                                <div class="premium-content" id="level" style="display: none;">-</div>
+                            </div>
+                        </div>
+
+                        <!-- Examples (Premium) -->
+                        <div class="detail-card premium-feature" id="examplesCard">
+                            <div class="card-header">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>أمثلة الاستخدام</h4>
+                                <span class="feature-badge premium">
+                                    <i class="fas fa-crown"></i>
+                                    Premium
+                                </span>
+                            </div>
+                            <div class="card-content">
+                                <div class="premium-overlay">
+                                    <i class="fas fa-lock"></i>
+                                    <p>ترقية للحصول على أمثلة شاملة</p>
+                                    <button class="upgrade-btn" onclick="showUpgradeModal()">ترقية الآن</button>
+                                </div>
+                                <div class="premium-content" id="examples" style="display: none;">-</div>
+                            </div>
+                        </div>
+
+                        <!-- Synonyms (Premium) -->
+                        <div class="detail-card premium-feature" id="synonymsCard">
+                            <div class="card-header">
+                                <i class="fas fa-equals"></i>
+                                <h4>المرادفات</h4>
+                                <span class="feature-badge premium">
+                                    <i class="fas fa-crown"></i>
+                                    Premium
+                                </span>
+                            </div>
+                            <div class="card-content">
+                                <div class="premium-overlay">
+                                    <i class="fas fa-lock"></i>
+                                    <p>ترقية للحصول على المرادفات</p>
+                                    <button class="upgrade-btn" onclick="showUpgradeModal()">ترقية الآن</button>
+                                </div>
+                                <div class="premium-content" id="synonyms" style="display: none;">-</div>
+                            </div>
+                        </div>
+
+                        <!-- Antonyms (Premium) -->
+                        <div class="detail-card premium-feature" id="antonymsCard">
+                            <div class="card-header">
+                                <i class="fas fa-exchange-alt"></i>
+                                <h4>الأضداد</h4>
+                                <span class="feature-badge premium">
+                                    <i class="fas fa-crown"></i>
+                                    Premium
+                                </span>
+                            </div>
+                            <div class="card-content">
+                                <div class="premium-overlay">
+                                    <i class="fas fa-lock"></i>
+                                    <p>ترقية للحصول على الأضداد</p>
+                                    <button class="upgrade-btn" onclick="showUpgradeModal()">ترقية الآن</button>
+                                </div>
+                                <div class="premium-content" id="antonyms" style="display: none;">-</div>
+                            </div>
+                        </div>
+
+                        <!-- Verb Forms (Premium) -->
+                        <div class="detail-card premium-feature" id="verbFormsCard">
+                            <div class="card-header">
+                                <i class="fas fa-cogs"></i>
+                                <h4>تصريفات الفعل</h4>
+                                <span class="feature-badge premium">
+                                    <i class="fas fa-crown"></i>
+                                    Premium
+                                </span>
+                            </div>
+                            <div class="card-content">
+                                <div class="premium-overlay">
+                                    <i class="fas fa-lock"></i>
+                                    <p>ترقية للحصول على تصريفات الأفعال</p>
+                                    <button class="upgrade-btn" onclick="showUpgradeModal()">ترقية الآن</button>
+                                </div>
+                                <div class="premium-content" id="verbForms" style="display: none;">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-examples">
+                <h3>أمثلة سريعة للتجربة</h3>
+                <div class="examples-grid">
+                    <button class="example-btn" data-word="كتاب">كتاب</button>
+                    <button class="example-btn" data-word="beautiful">beautiful</button>
+                    <button class="example-btn" data-word="يجري">يجري</button>
+                    <button class="example-btn" data-word="house">house</button>
+                    <button class="example-btn" data-word="سعيد">سعيد</button>
+                    <button class="example-btn" data-word="study">study</button>
+                    <button class="example-btn" data-word="طعام">طعام</button>
+                    <button class="example-btn" data-word="travel">travel</button>
+                </div>
+            </div>
+
+            <!-- Pricing Section -->
+            <div class="pricing-section">
+                <h3>خطط الاشتراك</h3>
+                <div class="pricing-cards">
+                    <div class="pricing-card free-plan">
+                        <div class="plan-header">
+                            <h4>مجاني</h4>
+                            <div class="price">0 ريال</div>
+                        </div>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> ترجمة أساسية</li>
+                            <li><i class="fas fa-check"></i> تعريف مبسط</li>
+                            <li><i class="fas fa-check"></i> نوع الكلمة</li>
+                            <li><i class="fas fa-times"></i> أمثلة الاستخدام</li>
+                            <li><i class="fas fa-times"></i> المرادفات والأضداد</li>
+                        </ul>
+                        <button class="plan-btn current-plan">الخطة الحالية</button>
+                    </div>
+
+                    <div class="pricing-card premium-plan">
+                        <div class="plan-header">
+                            <h4>Premium</h4>
+                            <div class="price">29 ريال<span>/شهر</span></div>
+                            <div class="popular-badge">الأكثر شعبية</div>
+                        </div>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> جميع المميزات المجانية</li>
+                            <li><i class="fas fa-check"></i> تعريف مفصل وشامل</li>
+                            <li><i class="fas fa-check"></i> أمثلة متنوعة</li>
+                            <li><i class="fas fa-check"></i> مرادفات وأضداد</li>
+                            <li><i class="fas fa-check"></i> تصريفات الأفعال</li>
+                            <li><i class="fas fa-check"></i> مستوى الصعوبة</li>
+                            <li><i class="fas fa-check"></i> نطق صوتي محسن</li>
+                        </ul>
+                        <button class="plan-btn upgrade-btn" onclick="showUpgradeModal()">ترقية الآن</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 مترجم شامل - جميع الحقوق محفوظة</p>
+        </footer>
+    </div>
+
+    <!-- Upgrade Modal -->
+    <div class="modal-overlay" id="upgradeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-crown"></i> ترقية إلى Premium</h3>
+                <button class="close-btn" onclick="closeUpgradeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="upgrade-benefits">
+                    <h4>احصل على المميزات الكاملة:</h4>
+                    <ul>
+                        <li><i class="fas fa-star"></i> تعريفات مفصلة وشاملة</li>
+                        <li><i class="fas fa-star"></i> أمثلة متنوعة للاستخدام</li>
+                        <li><i class="fas fa-star"></i> مرادفات وأضداد كاملة</li>
+                        <li><i class="fas fa-star"></i> تصريفات الأفعال</li>
+                        <li><i class="fas fa-star"></i> مستويات الصعوبة</li>
+                        <li><i class="fas fa-star"></i> نطق صوتي محسن</li>
+                    </ul>
+                </div>
+                <div class="payment-options">
+                    <button class="payment-btn" onclick="simulatePayment('monthly')">
+                        <i class="fas fa-credit-card"></i>
+                        اشتراك شهري - 29 ريال
+                    </button>
+                    <button class="payment-btn annual" onclick="simulatePayment('annual')">
+                        <i class="fas fa-calendar-alt"></i>
+                        اشتراك سنوي - 299 ريال
+                        <span class="discount">وفر 49 ريال!</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

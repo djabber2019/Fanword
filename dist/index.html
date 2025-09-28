@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مترجم شامل - عربي إلى إنجليزي</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-language"></i>
+                    <h1>مترجم شامل</h1>
+                </div>
+                <p class="subtitle">ترجمة احترافية من العربية إلى الإنجليزية مع تفاصيل شاملة</p>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="translator-section">
+                <div class="input-section">
+                    <div class="input-header">
+                        <i class="fas fa-edit"></i>
+                        <h3>أدخل الكلمة العربية</h3>
+                    </div>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="arabicInput" 
+                            class="word-input" 
+                            placeholder="اكتب الكلمة العربية هنا..."
+                            autocomplete="off"
+                        >
+                        <button id="translateBtn" class="translate-btn">
+                            <div class="fan-container">
+                                <i class="fas fa-fan fan-icon" id="fanIcon"></i>
+                            </div>
+                            <span class="btn-text">ترجم</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="loading-section" id="loadingSection">
+                    <div class="loading-content">
+                        <div class="spinning-fan">
+                            <i class="fas fa-fan"></i>
+                        </div>
+                        <p>جاري البحث عن الترجمة...</p>
+                    </div>
+                </div>
+
+                <div class="results-section" id="resultsSection">
+                    <div class="translation-card">
+                        <div class="card-header">
+                            <i class="fas fa-language"></i>
+                            <h3>الترجمة الأساسية</h3>
+                        </div>
+                        <div class="translation-content">
+                            <div class="translation-item">
+                                <span class="label">العربية:</span>
+                                <span class="arabic-word" id="originalWord">-</span>
+                            </div>
+                            <div class="translation-item">
+                                <span class="label">الإنجليزية:</span>
+                                <span class="english-word" id="englishTranslation">-</span>
+                                <button class="pronunciation-btn" id="pronunciationBtn">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="translation-item">
+                                <span class="label">النطق:</span>
+                                <span class="pronunciation" id="pronunciation">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="detail-card">
+                            <div class="card-header">
+                                <i class="fas fa-book"></i>
+                                <h4>التعريف</h4>
+                            </div>
+                            <div class="card-content">
+                                <p id="definition">-</p>
+                            </div>
+                        </div>
+
+                        <div class="detail-card">
+                            <div class="card-header">
+                                <i class="fas fa-tags"></i>
+                                <h4>نوع الكلمة</h4>
+                            </div>
+                            <div class="card-content">
+                                <span class="word-type" id="wordType">-</span>
+                            </div>
+                        </div>
+
+                        <div class="detail-card">
+                            <div class="card-header">
+                                <i class="fas fa-layer-group"></i>
+                                <h4>المستوى</h4>
+                            </div>
+                            <div class="card-content">
+                                <span class="level-badge" id="level">-</span>
+                            </div>
+                        </div>
+
+                        <div class="detail-card">
+                            <div class="card-header">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>أمثلة الاستخدام</h4>
+                            </div>
+                            <div class="card-content">
+                                <div id="examples">-</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-card">
+                            <div class="card-header">
+                                <i class="fas fa-equals"></i>
+                                <h4>المرادفات</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="synonyms-list" id="synonyms">-</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-card">
+                            <div class="card-header">
+                                <i class="fas fa-exchange-alt"></i>
+                                <h4>الأضداد</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="antonyms-list" id="antonyms">-</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-card">
+                            <div class="card-header">
+                                <i class="fas fa-cogs"></i>
+                                <h4>تصريفات الفعل</h4>
+                            </div>
+                            <div class="card-content">
+                                <div id="verbForms">-</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-card">
+                            <div class="card-header">
+                                <i class="fas fa-puzzle-piece"></i>
+                                <h4>كلمات مركبة</h4>
+                            </div>
+                            <div class="card-content">
+                                <div id="compounds">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-examples">
+                <h3>أمثلة سريعة للتجربة</h3>
+                <div class="examples-grid">
+                    <button class="example-btn" data-word="كتاب">كتاب</button>
+                    <button class="example-btn" data-word="يجري">يجري</button>
+                    <button class="example-btn" data-word="جميل">جميل</button>
+                    <button class="example-btn" data-word="منزل">منزل</button>
+                    <button class="example-btn" data-word="يدرس">يدرس</button>
+                    <button class="example-btn" data-word="سعيد">سعيد</button>
+                    <button class="example-btn" data-word="طعام">طعام</button>
+                    <button class="example-btn" data-word="يسافر">يسافر</button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 مترجم شامل - جميع الحقوق محفوظة</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
