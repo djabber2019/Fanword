@@ -20,11 +20,8 @@ jobs:
           cordova platform add android
       - name: Copy Fanword web files into Cordova
         run: |
-          rm -rf fanword/www/fanword 
-          cp -r * fanword/www/
-          rm -rf fanword/www/fanword # avoid copying the Cordova folder itself
-      - name: Build APK
-        run: |
+          rsync -av --exclude='fanword' ./ fanword/www/
+          - name: Build APK
           cd fanword
           cordova build android
       - name: Upload APK
