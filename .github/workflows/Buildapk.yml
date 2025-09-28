@@ -1,40 +1,32 @@
-
+yaml
 name: Build Fanword APK
-
 on:
   workflow_dispatch:
-
 jobs:
   build-apk:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-
       - name: Install Cordova
         run: npm install -g cordova
-
       - name: Create Cordova project
         run: |
           cordova create fanword com.fanword.app Fanword
           cd fanword
           cordova platform add android
-
       - name: Copy Fanword web files into Cordova
         run: |
           cp -r * fanword/www/
           rm -rf fanword/www/fanword # avoid copying the Cordova folder itself
-
       - name: Build APK
         run: |
           cd fanword
           cordova build android
-
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
