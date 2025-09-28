@@ -21,7 +21,8 @@ jobs:
       - name: Copy Fanword web files into Cordova
         run: |
           rsync -av --exclude='fanword' ./ fanword/www/
-          - name: Build APK
+          
+      - name: Build APK
           cd fanword
           cordova build android
       - name: Upload APK
