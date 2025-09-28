@@ -1,4 +1,5 @@
-name: "Build Fanword APK"
+name: 
+    "Build Fanword APK"
 on:
   workflow_dispatch:
 jobs:
